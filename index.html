@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101411">
+  <meta name="description" content="Acompanhe sua evolução diária, uma atitude de cada vez.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Haki — Evolução diária</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark" aria-hidden="true">覇</div>
+      <div class="brand-copy">
+        <p class="eyebrow">PROJETO PESSOAL</p>
+        <h1>HAKI <span>DO REI</span></h1>
+      </div>
+      <button id="installBtn" class="install-btn hidden" type="button">＋ Instalar</button>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">PONTUAÇÃO TOTAL</p>
+            <div class="total-line"><span id="totalScore">0</span><span class="pts">PTS</span></div>
+          </div>
+          <div class="rank-stamp">
+            <span class="rank-symbol">✦</span>
+            <span id="rankName">INICIANTE</span>
+          </div>
+        </div>
+        <div class="level-track"><div id="levelProgress" class="level-progress"></div></div>
+        <div class="level-foot"><span id="nextGoalText">Próxima meta: 10 pts</span><span id="progressPercent">0%</span></div>
+        <p id="rankDescription" class="rank-description">Toda evolução começa com uma escolha.</p>
+      </section>
+
+      <section class="date-panel panel">
+        <button id="prevDay" class="date-arrow" aria-label="Dia anterior">‹</button>
+        <div class="date-center">
+          <p class="eyebrow" id="dayLabel">REGISTRO DO DIA</p>
+          <strong id="selectedDateLabel">Hoje</strong>
+          <span id="dayTotal" class="day-total">0 pts conquistados hoje</span>
+        </div>
+        <button id="nextDay" class="date-arrow" aria-label="Próximo dia">›</button>
+      </section>
+
+      <div id="pastDayNotice" class="notice hidden">Você está vendo um dia anterior. Volte para hoje para registrar novas atitudes.</div>
+
+      <section class="section-heading">
+        <div>
+          <p class="eyebrow">SEUS ATRIBUTOS</p>
+          <h2>Forje sua evolução</h2>
+        </div>
+        <span class="live-dot">● AO VIVO</span>
+      </section>
+
+      <section class="attribute-list">
+        <article class="attribute-card panel" data-attribute="coragem">
+          <div class="attribute-top">
+            <div class="attribute-icon courage">⚡</div>
+            <div class="attribute-info"><h3>Coragem</h3><p>Agir apesar do medo</p></div>
+            <div class="attribute-score"><strong id="score-coragem">0</strong><small>PTS</small></div>
+          </div>
+          <div class="score-controls">
+            <button class="score-btn minus" data-key="coragem" data-delta="-2" aria-label="Diminuir coragem em dois pontos">−</button>
+            <div class="control-caption"><span>RECUAR</span><span>ENFRENTAR</span></div>
+            <button class="score-btn plus" data-key="coragem" data-delta="1" aria-label="Aumentar coragem em um ponto">＋</button>
+          </div>
+        </article>
+
+        <article class="attribute-card panel" data-attribute="autoestima">
+          <div class="attribute-top">
+            <div class="attribute-icon esteem">◆</div>
+            <div class="attribute-info"><h3>Autoestima</h3><p>Confiar na própria capacidade</p></div>
+            <div class="attribute-score"><strong id="score-autoestima">0</strong><small>PTS</small></div>
+          </div>
+          <div class="score-controls">
+            <button class="score-btn minus" data-key="autoestima" data-delta="-2" aria-label="Diminuir autoestima em dois pontos">−2</button>
+            <div class="control-caption"><span>ME DIMINUIR</span><span>ME FORTALECER</span></div>
+            <button class="score-btn plus" data-key="autoestima" data-delta="1" aria-label="Aumentar autoestima em um ponto">＋</button>
+          </div>
+        </article>
+
+        <article class="attribute-card panel" data-attribute="habilidade">
+          <div class="attribute-top">
+            <div class="attribute-icon skill">◎</div>
+            <div class="attribute-info"><h3>Habilidade em vendas</h3><p>Prática profissional</p></div>
+            <div class="attribute-score"><strong id="score-habilidade">0</strong><small>PTS</small></div>
+          </div>
+          <div class="subskill">
+            <div><strong>Rapport e conexão</strong><small>Criar conexão genuína</small></div>
+            <div class="mini-controls"><button class="mini-btn minus" data-key="rapport" data-delta="-1" aria-label="Diminuir rapport">−</button><b id="score-rapport">0</b><button class="mini-btn plus" data-key="rapport" data-delta="1" aria-label="Aumentar rapport">＋</button></div>
+          </div>
+          <div class="subskill">
+            <div><strong>Investigar necessidades</strong><small>Aprofundar dores e objetivos</small></div>
+            <div class="mini-controls"><button class="mini-btn minus" data-key="necessidades" data-delta="-1" aria-label="Diminuir investigação">−</button><b id="score-necessidades">0</b><button class="mini-btn plus" data-key="necessidades" data-delta="1" aria-label="Aumentar investigação">＋</button></div>
+          </div>
+          <div class="subskill">
+            <div><strong>Pedir indicações</strong><small>Solicitar referências com naturalidade</small></div>
+            <div class="mini-controls"><button class="mini-btn minus" data-key="indicacoes" data-delta="-1" aria-label="Diminuir indicações">−</button><b id="score-indicacoes">0</b><button class="mini-btn plus" data-key="indicacoes" data-delta="1" aria-label="Aumentar indicações">＋</button></div>
+          </div>
+        </article>
+
+        <article class="attribute-card panel" data-attribute="conhecimento">
+          <div class="attribute-top">
+            <div class="attribute-icon knowledge">⌁</div>
+            <div class="attribute-info"><h3>Conhecimento</h3><p>Estudo + leitura no mesmo dia</p></div>
+            <div class="attribute-score"><strong id="score-conhecimento">0</strong><small>PTS</small></div>
+          </div>
+          <div class="rule-note">Meta diária: <b>1 hora de aula</b> + <b>10 páginas de livro</b>.</div>
+          <div class="score-controls">
+            <button class="score-btn minus" data-key="conhecimento" data-delta="-1" aria-label="Registrar conhecimento não concluído">−</button>
+            <div class="control-caption"><span>INCOMPLETO −1</span><span>AMBOS FEITOS +1</span></div>
+            <button class="score-btn plus" data-key="conhecimento" data-delta="1" aria-label="Registrar conhecimento concluído">＋</button>
+          </div>
+        </article>
+
+        <article class="attribute-card panel" data-attribute="disciplina">
+          <div class="attribute-top">
+            <div class="attribute-icon discipline">◷</div>
+            <div class="attribute-info"><h3>Disciplina</h3><p>Fazer o combinado consigo</p></div>
+            <div class="attribute-score"><strong id="score-disciplina">0</strong><small>PTS</small></div>
+          </div>
+          <div class="subskill">
+            <div><strong>Acordar às 5h30</strong><small>Respeitar o horário planejado</small></div>
+            <div class="mini-controls"><button class="mini-btn minus" data-key="acordar" data-delta="-1" aria-label="Registrar que não acordou no horário">−</button><b id="score-acordar">0</b><button class="mini-btn plus" data-key="acordar" data-delta="1" aria-label="Registrar que acordou no horário">＋</button></div>
+          </div>
+          <div class="subskill">
+            <div><strong>Correr</strong><small>Manter o compromisso com o treino</small></div>
+            <div class="mini-controls"><button class="mini-btn minus" data-key="correr" data-delta="-1" aria-label="Registrar corrida não feita">−</button><b id="score-correr">0</b><button class="mini-btn plus" data-key="correr" data-delta="1" aria-label="Registrar corrida feita">＋</button></div>
+          </div>
+          <p class="small-note">Em dias de turno que impossibilite acordar às 5h30, não se penalize por uma escolha necessária. Ajuste a regra à sua realidade.</p>
+        </article>
+      </section>
+
+      <section class="section-heading goals-heading">
+        <div><p class="eyebrow">PRÓXIMOS DESAFIOS</p><h2>Metas de evolução</h2></div>
+        <span class="goal-count" id="goalCount">0/6</span>
+      </section>
+      <section id="goalsList" class="goals-list"></section>
+
+      <section class="section-heading history-heading">
+        <div><p class="eyebrow">CONSISTÊNCIA</p><h2>Seu histórico</h2></div>
+        <button id="exportBtn" class="text-button">Exportar dados ↗</button>
+      </section>
+      <section class="panel history-panel">
+        <div class="history-summary">
+          <div><span class="history-number" id="activeDays">0</span><small>dias com registros</small></div>
+          <div><span class="history-number" id="bestDay">0</span><small>melhor dia (pts)</small></div>
+          <div><span class="history-number" id="streak">0</span><small>dias seguidos</small></div>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+      <p class="footer-note">A pontuação é uma ferramenta de reflexão, não uma medida do seu valor como pessoa. Seja honesto — e justo consigo.</p>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
